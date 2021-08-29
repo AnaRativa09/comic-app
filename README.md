@@ -18,7 +18,7 @@ Construir una aplicación web que permite al usuario visualizar comics de manera
 
 * Instalación de dependencias: ```npm install```
 
-* Ejecutar ```npm start``` para interactuar con la web app desde http://localhost:3000
+* Ejecutar ```npm start``` para interactuar con la web app desde http://localhost:3000/comic-app#/
  
 O ejecutar la aplicación desde el deploy en gh-pages https://anarativa09.github.io/comic-app/#/
 
