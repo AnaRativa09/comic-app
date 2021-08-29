@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 
 // Import views
@@ -8,12 +8,12 @@ import NotFound from './views/NotFound';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route component={NotFound} />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
