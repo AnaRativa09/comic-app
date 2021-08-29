@@ -20,7 +20,7 @@ Construir una aplicación web que permite al usuario visualizar comics de manera
 
 * Ejecutar ```npm start``` para interactuar con la web app desde http://localhost:3000
  
-O ejecutar la aplicación desde el deploy en gh-pages
+O ejecutar la aplicación desde el deploy en gh-pages https://anarativa09.github.io/comic-app/#/
 
 ## 3. Retos del proyecto
 
