@@ -2,9 +2,9 @@
 
 ## Índice
 
-* [1. Objetivo del proyecto](#1-objetivo-del-producto)
-* [2. Instalación](#2-instalacion)
-* [3. Retos del proyecto](#3-investigación-ux)
+* [1. Objetivo del proyecto](#1-objetivo-del-proyecto)
+* [2. Instalación](#2-instalación)
+* [3. Retos del proyecto](#3-retos-del-proyecto)
 
 ***
 
@@ -12,7 +12,7 @@
 
 Construir una aplicación web que permite al usuario visualizar comics de manera aleatoria y calificarlos.
 
-## 2.Instalación
+## 2. Instalación
 
 * Clonar el repositorio: ```git clone https://github.com/AnaRativa09/comic-app.git```
 
