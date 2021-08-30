@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Card, Button } from 'react-bootstrap';
 
 // Import components
-import Footer from '../components/Footer';
 import Header from '../components/Header';
-import Button from '../components/Button';
-import ComicCard from '../components/ComicCard';
+import Footer from '../components/Footer';
 import Loader from '../components/Loader';
+import StarRating from '../components/StarRating';
 
 function Home() {
   const [dataComic, setDataComic] = useState(null); // Data actual comic
   const [numLatestComic, setNumLatestComic] = useState(null);
-  const [numComic, setNumComic] = useState(null);
+  const [numComic, setNumComic] = useState(null); // Set de new comic number
+  const [validateComic, setValidateComic] = useState(null); // Comic have calification?
 
   // API Call Functions
   const fetchComic = (number) => {
     setDataComic(null);
+    setValidateComic(false);
     axios.get(`/${number}/info.0.json`)
       .then((res) => setDataComic(res.data))
       .catch((error) => console.log(error));
@@ -23,6 +25,7 @@ function Home() {
 
   const fetchLatestComic = () => {
     setDataComic(null);
+    setValidateComic(false);
     axios.get('/info.0.json') // Current comic in API
       .then((res) => {
         setDataComic(res.data);
@@ -51,34 +54,29 @@ function Home() {
     <>
       <Header />
 
-      <section className="buttons-section">
-        <Button
-          text="First"
-          click={() => { setNumComic(1); }}
-          isDisabled={dataComic.num === 1}
-        />
-        <Button
-          text="Prev"
-          click={() => { setNumComic(dataComic.num - 1); }}
-          isDisabled={dataComic.num <= 1}
-        />
-        <Button
-          text="Random"
-          click={() => { setNumComic(getRandomNumber(1, numLatestComic)); }}
-        />
-        <Button
-          text="Next"
-          click={() => { setNumComic(dataComic.num + 1); }}
-          isDisabled={dataComic.num >= numLatestComic}
-        />
-        <Button
-          text="Last"
-          click={() => { setNumComic(null); }}
-          isDisabled={dataComic.num === numLatestComic}
-        />
-      </section>
+      <Card className="text-center card-container">
+        <Card.Header>
+          <div className="flex-row">
+            {`#${dataComic.num}`}
+            <StarRating setValidateComic={setValidateComic} />
+          </div>
+        </Card.Header>
 
-      <ComicCard data={dataComic} />
+        <Card.Body>
+          <Card.Title>{dataComic.title}</Card.Title>
+          <Card.Img src={dataComic.img} className="comic-img" alt={dataComic.title} />
+        </Card.Body>
+
+        <Card.Footer className="card-footer">
+          <Button
+            variant="primary"
+            disabled={!validateComic}
+            onClick={() => { setNumComic(getRandomNumber(1, numLatestComic)); }}
+          >
+            New Random Comic
+          </Button>
+        </Card.Footer>
+      </Card>
 
       <Footer />
     </>

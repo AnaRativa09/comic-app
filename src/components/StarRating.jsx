@@ -22,7 +22,7 @@ function StarRating({ setValidateComic }) {
             aria-label="calification button"
           >
             <FaStar
-              size={30}
+              size={20}
               color={calificationValue <= calification ? '#FFB91D' : 'gray'}
             />
           </button>

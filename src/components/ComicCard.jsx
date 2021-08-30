@@ -1,19 +1,25 @@
 import React from 'react';
+
+// Import components
 import StarRating from './StarRating';
 
-function ComicCard({ data }) {
+function ComicCard({ data, setValidateComic }) {
   return (
     <section className="comic-container">
-      <div className="title-comic">
-        <h3>{data.title}</h3>
-        <p>
-          #
-          {data.num}
-        </p>
-        <StarRating />
+      <div className="header-comic">
+        <div className="title-comic">
+          <h2>{data.title}</h2>
+          <p>
+            #
+            {data.num}
+          </p>
+        </div>
+
+        <StarRating setValidateComic={setValidateComic} />
       </div>
 
       <img src={data.img} alt={data.title} />
+
     </section>
   );
 }
