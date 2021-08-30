@@ -20,6 +20,14 @@ function Home() {
       .catch((error) => console.log(error));
   };
 
+  const fetchLatestComic = () => {
+    setDataComic(null);
+
+    axios.get('/info.0.json') // Current comic
+      .then((res) => setDataComic(res.data))
+      .catch((error) => console.log(error));
+  };
+
   // Get Random number
   const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
@@ -38,9 +46,31 @@ function Home() {
 
       <ComicCard data={dataComic} />
 
-      <section className="buttons-sections">
-        <Button text="Previous Comic" click={() => { fetchComic(dataComic.num - 1); }} />
-        <Button text="New Random Comic" click={() => { fetchComic(getRandomNumber(1, 2508)); }} />
+      <section className="buttons-section">
+        <Button
+          text="First"
+          click={() => { fetchComic(1); }}
+          isDisabled={dataComic.num === 1}
+        />
+        <Button
+          text="Prev"
+          click={() => { fetchComic(dataComic.num - 1); }}
+          isDisabled={dataComic.num <= 1}
+        />
+        <Button
+          text="Random"
+          click={() => { fetchComic(getRandomNumber(1, 2508)); }}
+        />
+        <Button
+          text="Next"
+          click={() => { fetchComic(dataComic.num + 1); }}
+          isDisabled={dataComic.num >= 2508}
+        />
+        <Button
+          text="Last"
+          click={() => { fetchLatestComic(); }}
+          isDisabled={dataComic.num >= 2508}
+        />
       </section>
 
       <Footer />
