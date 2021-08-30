@@ -5,6 +5,7 @@
 * [1. Objetivo del proyecto](#1-objetivo-del-proyecto)
 * [2. Instalación](#2-instalación)
 * [3. Retos del proyecto](#3-retos-del-proyecto)
+* [4. Herramientas Utilizadas](#4-herramientas-utilizadas)
 
 ***
 
@@ -19,8 +20,7 @@ Construir una aplicación web que permite al usuario visualizar comics de manera
 * Instalación de dependencias: ```npm install```
 
 * Ejecutar ```npm start``` para interactuar con la web app desde http://localhost:3000/comic-app#/
- 
-O ejecutar la aplicación desde el deploy en gh-pages https://anarativa09.github.io/comic-app/#/
 
 ## 3. Retos del proyecto
 
+## 4. Herramientas Utilizadas

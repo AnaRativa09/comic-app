@@ -1,0 +1,33 @@
+@import 'variables';
+@import 'ComicCard';
+@import 'NotFound';
+
+// Custom styles
+body {
+  margin: 0;
+  text-align: center;
+  font-family: $primaryFont;
+  color: $darkFont;
+  background-color: $backgroundColor;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  color: $paletteFour;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: $paletteFour;
+  color: $lightFont;
+  a {
+    color: $lightFont;
+  }
+}
