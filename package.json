@@ -27,7 +27,8 @@
     "eslint": "eslint --ext .jsx,.js src",
     "pre-deploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "pre-commit": "npm run eslint"
+    "pre-commit": "npm run eslint",
+    "eslint-fix": "npm run eslint -- --fix"
   },
   "eslintConfig": {
     "extends": [
