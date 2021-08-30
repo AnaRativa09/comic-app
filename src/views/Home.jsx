@@ -9,8 +9,9 @@ import ComicCard from '../components/ComicCard';
 import Loader from '../components/Loader';
 
 function Home() {
-  const [dataComic, setDataComic] = useState(null);
+  const [dataComic, setDataComic] = useState(null); // Data actual comic
   const [numLatestComic, setNumLatestComic] = useState(null);
+  const [numComic, setNumComic] = useState(null);
 
   // API Call Functions
   const fetchComic = (number) => {
@@ -22,7 +23,7 @@ function Home() {
 
   const fetchLatestComic = () => {
     setDataComic(null);
-    axios.get('/info.0.json') // Current comic
+    axios.get('/info.0.json') // Current comic in API
       .then((res) => {
         setDataComic(res.data);
         setNumLatestComic(res.data.num);
@@ -35,9 +36,13 @@ function Home() {
 
   // Getting Data Latest Comic
   useEffect(() => {
-    fetchLatestComic();
-  }, []);
+    if (numComic === null) {
+      fetchLatestComic();
+    }
+    fetchComic(numComic);
+  }, [numComic]);
 
+  /* ----- Component Return ----- */
   if (!dataComic) {
     return <Loader />;
   }
@@ -49,27 +54,27 @@ function Home() {
       <section className="buttons-section">
         <Button
           text="First"
-          click={() => { fetchComic(1); }}
+          click={() => { setNumComic(1); }}
           isDisabled={dataComic.num === 1}
         />
         <Button
           text="Prev"
-          click={() => { fetchComic(dataComic.num - 1); }}
+          click={() => { setNumComic(dataComic.num - 1); }}
           isDisabled={dataComic.num <= 1}
         />
         <Button
           text="Random"
-          click={() => { fetchComic(getRandomNumber(1, numLatestComic)); }}
+          click={() => { setNumComic(getRandomNumber(1, numLatestComic)); }}
         />
         <Button
           text="Next"
-          click={() => { fetchComic(dataComic.num + 1); }}
+          click={() => { setNumComic(dataComic.num + 1); }}
           isDisabled={dataComic.num >= numLatestComic}
         />
         <Button
           text="Last"
-          click={() => { fetchLatestComic(); }}
-          isDisabled={dataComic.num >= numLatestComic}
+          click={() => { setNumComic(null); }}
+          isDisabled={dataComic.num === numLatestComic}
         />
       </section>
 
