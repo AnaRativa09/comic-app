@@ -1,4 +1,5 @@
 import React from 'react';
+import StarRating from './StarRating';
 
 function ComicCard({ data }) {
   return (
@@ -9,6 +10,7 @@ function ComicCard({ data }) {
           #
           {data.num}
         </p>
+        <StarRating />
       </div>
 
       <img src={data.img} alt={data.title} />
