@@ -1,0 +1,13 @@
+.comic-container {
+  background-color: $paletteOne;
+  width: 80vw;
+  border-radius: 10px;
+  .title-comic{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  img {
+    max-height: 50vh;
+  }
+} 

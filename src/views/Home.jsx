@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Import components
+import Footer from '../components/Footer';
+import Header from '../components/Header';
+import Button from '../components/Button';
+import ComicCard from '../components/ComicCard';
+import Loader from '../components/Loader';
+
 function Home() {
   const [dataComic, setDataComic] = useState(null);
 
-  useEffect(() => {
-    axios.get('/info.0.json')
-      .then((res) => setDataComic(res.data))
-      .catch((error) => console.log(error));
-  }, []);
-
-  console.log(dataComic);
-
+  // API Call Function
   const fetchComic = (number) => {
     setDataComic(null);
 
@@ -20,25 +20,30 @@ function Home() {
       .catch((error) => console.log(error));
   };
 
+  // Get Random number
+  const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
+
+  // Getting Data
+  useEffect(() => {
+    fetchComic(getRandomNumber(1, 2508));
+  }, []);
+
   if (!dataComic) {
-    return <h1>Cargando</h1>;
+    return <Loader />;
   }
 
   return (
     <>
-      <h1>Comic App</h1>
+      <Header />
 
-      <div>
-        <h3>{dataComic.title}</h3>
-        <p>
-          Comic #
-          {dataComic.num}
-        </p>
-        <img src={dataComic.img} alt={dataComic.title} />
-      </div>
+      <ComicCard data={dataComic} />
 
-      <button type="button" onClick={() => { fetchComic(dataComic.num - 1); }}>Anterior</button>
+      <section className="buttons-sections">
+        <Button text="Previous Comic" click={() => { fetchComic(dataComic.num - 1); }} />
+        <Button text="New Random Comic" click={() => { fetchComic(getRandomNumber(1, 2508)); }} />
+      </section>
 
+      <Footer />
     </>
   );
 }
