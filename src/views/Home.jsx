@@ -10,11 +10,11 @@ import Loader from '../components/Loader';
 
 function Home() {
   const [dataComic, setDataComic] = useState(null);
+  const [numLatestComic, setNumLatestComic] = useState(null);
 
-  // API Call Function
+  // API Call Functions
   const fetchComic = (number) => {
     setDataComic(null);
-
     axios.get(`/${number}/info.0.json`)
       .then((res) => setDataComic(res.data))
       .catch((error) => console.log(error));
@@ -22,18 +22,20 @@ function Home() {
 
   const fetchLatestComic = () => {
     setDataComic(null);
-
     axios.get('/info.0.json') // Current comic
-      .then((res) => setDataComic(res.data))
+      .then((res) => {
+        setDataComic(res.data);
+        setNumLatestComic(res.data.num);
+      })
       .catch((error) => console.log(error));
   };
 
-  // Get Random number
+  // Get Random Number
   const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
-  // Getting Data
+  // Getting Data Latest Comic
   useEffect(() => {
-    fetchComic(getRandomNumber(1, 2508));
+    fetchLatestComic();
   }, []);
 
   if (!dataComic) {
@@ -43,8 +45,6 @@ function Home() {
   return (
     <>
       <Header />
-
-      <ComicCard data={dataComic} />
 
       <section className="buttons-section">
         <Button
@@ -59,19 +59,21 @@ function Home() {
         />
         <Button
           text="Random"
-          click={() => { fetchComic(getRandomNumber(1, 2508)); }}
+          click={() => { fetchComic(getRandomNumber(1, numLatestComic)); }}
         />
         <Button
           text="Next"
           click={() => { fetchComic(dataComic.num + 1); }}
-          isDisabled={dataComic.num >= 2508}
+          isDisabled={dataComic.num >= numLatestComic}
         />
         <Button
           text="Last"
           click={() => { fetchLatestComic(); }}
-          isDisabled={dataComic.num >= 2508}
+          isDisabled={dataComic.num >= numLatestComic}
         />
       </section>
+
+      <ComicCard data={dataComic} />
 
       <Footer />
     </>
