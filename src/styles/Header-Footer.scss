@@ -1,0 +1,19 @@
+header {
+  color: $paletteFour;
+  width: 100vw;
+  button {
+    margin: 20px;
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: $paletteFour;
+  color: $lightFont;
+  padding: 10px 0;
+  a {
+    color: $lightFont;
+  }
+}

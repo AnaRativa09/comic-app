@@ -1,8 +1,19 @@
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 @import 'variables';
 @import 'ComicCard';
+@import 'Header-Footer';
+@import 'Home';
 @import 'NotFound';
+@import 'StarRating';
 
 // Custom styles
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 body {
   margin: 0;
   text-align: center;
@@ -11,23 +22,13 @@ body {
   background-color: $backgroundColor;
 }
 
-#root {
+p {
+  margin-bottom: 0;
+}
+
+.flex-row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-}
-
-header {
-  color: $paletteFour;
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
-  background-color: $paletteFour;
-  color: $lightFont;
-  a {
-    color: $lightFont;
-  }
-}
+  justify-content: space-around;
+} 

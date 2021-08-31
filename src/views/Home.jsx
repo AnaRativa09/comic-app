@@ -1,45 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { Card, Button } from 'react-bootstrap';
+import { fetchComic, fetchLatestComic, getRandomNumber } from '../controllers/ComicFunctions';
 
 // Import components
-import Footer from '../components/Footer';
 import Header from '../components/Header';
-import Button from '../components/Button';
-import ComicCard from '../components/ComicCard';
+import Footer from '../components/Footer';
 import Loader from '../components/Loader';
+import StarRating from '../components/StarRating';
 
 function Home() {
+  // localData
+  const localData = JSON.parse(sessionStorage.getItem('comics'));
+  const dataRanked = localData === null ? [] : localData;
+
+  // States
   const [dataComic, setDataComic] = useState(null); // Data actual comic
   const [numLatestComic, setNumLatestComic] = useState(null);
-  const [numComic, setNumComic] = useState(null);
+  const [numComic, setNumComic] = useState(null); // New comic number
+  const [isRanked, setIsRanked] = useState(null); // Comic was ranked?
+  const [rankedComics, setRankedComics] = useState(dataRanked); // Comic ranked historial
+  const [calification, setCalification] = useState(null);
 
-  // API Call Functions
-  const fetchComic = (number) => {
-    setDataComic(null);
-    axios.get(`/${number}/info.0.json`)
-      .then((res) => setDataComic(res.data))
-      .catch((error) => console.log(error));
-  };
+  // console.log('validated', rankedComics);
 
-  const fetchLatestComic = () => {
-    setDataComic(null);
-    axios.get('/info.0.json') // Current comic in API
-      .then((res) => {
-        setDataComic(res.data);
-        setNumLatestComic(res.data.num);
-      })
-      .catch((error) => console.log(error));
-  };
-
-  // Get Random Number
-  const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
-
-  // Getting Data Latest Comic
+  /* ----- Getting Data ----- */
   useEffect(() => {
     if (numComic === null) {
-      fetchLatestComic();
+      fetchLatestComic(setDataComic, setIsRanked, setNumLatestComic);
     }
-    fetchComic(numComic);
+    fetchComic(numComic, setDataComic, setIsRanked);
   }, [numComic]);
 
   /* ----- Component Return ----- */
@@ -49,36 +38,41 @@ function Home() {
 
   return (
     <>
-      <Header />
+      <Header rankedComics={rankedComics} />
 
-      <section className="buttons-section">
-        <Button
-          text="First"
-          click={() => { setNumComic(1); }}
-          isDisabled={dataComic.num === 1}
-        />
-        <Button
-          text="Prev"
-          click={() => { setNumComic(dataComic.num - 1); }}
-          isDisabled={dataComic.num <= 1}
-        />
-        <Button
-          text="Random"
-          click={() => { setNumComic(getRandomNumber(1, numLatestComic)); }}
-        />
-        <Button
-          text="Next"
-          click={() => { setNumComic(dataComic.num + 1); }}
-          isDisabled={dataComic.num >= numLatestComic}
-        />
-        <Button
-          text="Last"
-          click={() => { setNumComic(null); }}
-          isDisabled={dataComic.num === numLatestComic}
-        />
-      </section>
+      <h2>Random Comics</h2>
 
-      <ComicCard data={dataComic} />
+      <Card className="text-center card-container">
+        <Card.Header>
+          <div className="flex-row">
+            {`#${dataComic.num}`}
+            <StarRating
+              setIsRanked={setIsRanked}
+              setCalification={setCalification}
+              calification={calification}
+            />
+          </div>
+        </Card.Header>
+
+        <Card.Body>
+          <Card.Title>{dataComic.title}</Card.Title>
+          <Card.Img src={dataComic.img} className="comic-img" alt={dataComic.title} />
+        </Card.Body>
+
+        <Card.Footer className="card-footer">
+          <Button
+            variant="primary"
+            disabled={!isRanked}
+            onClick={() => {
+              setRankedComics([...rankedComics, { dataComic, calification }]);
+              setCalification(null);
+              setNumComic(getRandomNumber(1, numLatestComic));
+            }}
+          >
+            New Random Comic
+          </Button>
+        </Card.Footer>
+      </Card>
 
       <Footer />
     </>

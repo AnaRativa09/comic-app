@@ -1,8 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-
-// Import components
-import Button from '../components/Button';
+import { Button } from 'react-bootstrap';
 
 function NotFound() {
   const history = useHistory();
@@ -10,7 +8,9 @@ function NotFound() {
   return (
     <div className="not-found-container">
       <h2>404 Not Found</h2>
-      <Button text="Go Home" click={() => { history.push('/'); }} />
+      <Button variant="primary" onClick={() => { history.push('/'); }}>
+        Go to Home
+      </Button>
     </div>
   );
 }
