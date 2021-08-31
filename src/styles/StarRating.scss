@@ -1,0 +1,9 @@
+.star-rating-container {
+  display: flex;
+  justify-content: space-around;
+
+  button {
+    background-color: transparent;
+    border: none;
+  }
+}

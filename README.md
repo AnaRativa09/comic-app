@@ -4,7 +4,6 @@
 
 * [1. Objetivo del proyecto](#1-objetivo-del-proyecto)
 * [2. Instalación](#2-instalación)
-* [3. Retos del proyecto](#3-retos-del-proyecto)
 
 ***
 
@@ -18,9 +17,4 @@ Construir una aplicación web que permite al usuario visualizar comics de manera
 
 * Instalación de dependencias: ```npm install```
 
-* Ejecutar ```npm start``` para interactuar con la web app desde http://localhost:3000
- 
-O ejecutar la aplicación desde el deploy en gh-pages
-
-## 3. Retos del proyecto
-
+* Ejecutar ```npm start``` para interactuar con la web app desde http://localhost:3000/comic-app#/
