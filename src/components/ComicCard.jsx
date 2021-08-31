@@ -3,7 +3,7 @@ import React from 'react';
 // Import components
 import StarRating from './StarRating';
 
-function ComicCard({ data, setValidateComic }) {
+function ComicCard({ data, setIsRanked }) {
   return (
     <section className="comic-container">
       <div className="header-comic">
@@ -15,7 +15,7 @@ function ComicCard({ data, setValidateComic }) {
           </p>
         </div>
 
-        <StarRating setValidateComic={setValidateComic} />
+        <StarRating setIsRanked={setIsRanked} />
       </div>
 
       <img src={data.img} alt={data.title} />
