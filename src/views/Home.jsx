@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Card, Button } from 'react-bootstrap';
+import { fetchComic, fetchLatestComic, getRandomNumber } from '../controllers/ComicFunctions';
 
 // Import components
 import Header from '../components/Header';
@@ -9,40 +9,26 @@ import Loader from '../components/Loader';
 import StarRating from '../components/StarRating';
 
 function Home() {
+  // localData
+  const localData = JSON.parse(sessionStorage.getItem('comics'));
+  const dataRanked = localData === null ? [] : localData;
+
+  // States
   const [dataComic, setDataComic] = useState(null); // Data actual comic
   const [numLatestComic, setNumLatestComic] = useState(null);
-  const [numComic, setNumComic] = useState(null); // Set de new comic number
-  const [validateComic, setValidateComic] = useState(null); // Comic have calification?
+  const [numComic, setNumComic] = useState(null); // New comic number
+  const [isRanked, setIsRanked] = useState(null); // Comic was ranked?
+  const [rankedComics, setRankedComics] = useState(dataRanked); // Comic ranked historial
+  const [calification, setCalification] = useState(null);
 
-  // API Call Functions
-  const fetchComic = (number) => {
-    setDataComic(null);
-    setValidateComic(false);
-    axios.get(`/${number}/info.0.json`)
-      .then((res) => setDataComic(res.data))
-      .catch((error) => console.log(error));
-  };
+  // console.log('validated', rankedComics);
 
-  const fetchLatestComic = () => {
-    setDataComic(null);
-    setValidateComic(false);
-    axios.get('/info.0.json') // Current comic in API
-      .then((res) => {
-        setDataComic(res.data);
-        setNumLatestComic(res.data.num);
-      })
-      .catch((error) => console.log(error));
-  };
-
-  // Get Random Number
-  const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
-
-  // Getting Data Latest Comic
+  /* ----- Getting Data ----- */
   useEffect(() => {
     if (numComic === null) {
-      fetchLatestComic();
+      fetchLatestComic(setDataComic, setIsRanked, setNumLatestComic);
     }
-    fetchComic(numComic);
+    fetchComic(numComic, setDataComic, setIsRanked);
   }, [numComic]);
 
   /* ----- Component Return ----- */
@@ -52,13 +38,17 @@ function Home() {
 
   return (
     <>
-      <Header />
+      <Header rankedComics={rankedComics} />
 
       <Card className="text-center card-container">
         <Card.Header>
           <div className="flex-row">
             {`#${dataComic.num}`}
-            <StarRating setValidateComic={setValidateComic} />
+            <StarRating
+              setIsRanked={setIsRanked}
+              setCalification={setCalification}
+              calification={calification}
+            />
           </div>
         </Card.Header>
 
@@ -70,8 +60,12 @@ function Home() {
         <Card.Footer className="card-footer">
           <Button
             variant="primary"
-            disabled={!validateComic}
-            onClick={() => { setNumComic(getRandomNumber(1, numLatestComic)); }}
+            disabled={!isRanked}
+            onClick={() => {
+              setRankedComics([...rankedComics, { dataComic, calification }]);
+              setCalification(null);
+              setNumComic(getRandomNumber(1, numLatestComic));
+            }}
           >
             New Random Comic
           </Button>
