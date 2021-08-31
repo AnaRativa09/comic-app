@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaStar, FaRedoAlt } from 'react-icons/fa';
 
-function StarRating({ setValidateComic }) {
-  const [calification, setCalification] = useState(null);
+function StarRating({ setIsRanked, setCalification, calification }) {
   const arrStarts = [1, 2, 3, 4, 5];
 
   return (
@@ -16,7 +15,7 @@ function StarRating({ setValidateComic }) {
             value="calificationValue"
             onClick={() => {
               setCalification(calificationValue);
-              setValidateComic(true);
+              setIsRanked(true);
             }}
             key={start}
             aria-label="calification button"
@@ -33,7 +32,7 @@ function StarRating({ setValidateComic }) {
         type="button"
         onClick={() => {
           setCalification(null);
-          setValidateComic(false);
+          setIsRanked(false);
         }}
         aria-label="refresh button"
       >
