@@ -13,7 +13,7 @@ function Collection() {
     return (
       <>
         <Header />
-        <p> No has calificado ningún comic todavía. 🗯️💥</p>
+        <p>You have not rated any comics yet. 🗯️💥</p>
         <Footer />
       </>
     );
