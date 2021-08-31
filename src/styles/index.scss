@@ -1,11 +1,19 @@
-@import 'variables';
-@import 'ComicCard';
-@import 'NotFound';
-@import 'StarRating';
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+@import 'variables';
+@import 'ComicCard';
+@import 'Header-Footer';
+@import 'Home';
+@import 'NotFound';
+@import 'StarRating';
 
 // Custom styles
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 body {
   margin: 0;
   text-align: center;
@@ -18,46 +26,9 @@ p {
   margin-bottom: 0;
 }
 
-#root {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-header {
-  color: $paletteFour;
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
-  background-color: $paletteFour;
-  color: $lightFont;
-  padding: 10px 0;
-  a {
-    color: $lightFont;
-  }
-}
-
 .flex-row {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-}
-
-.comic-img {
-  max-height: 50vh;
-  width: auto;
-  max-width: 90vw;
-}
-
-.nav{
-  width: 100vw;
-}
-
-.card-footer {
-  display: flex;
-  justify-content: space-around;
-}
+} 

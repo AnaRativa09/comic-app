@@ -1,0 +1,19 @@
+.comic-img {
+  max-height: 50vh;
+  width: auto;
+  max-width: 90vw;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.comics-ranked-container {
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
