@@ -23,6 +23,8 @@ function Collection() {
     <>
       <Header />
 
+      <h2>Ranked Collection</h2>
+
       <section className="comics-ranked-container">
         { localData.map((comic) => (
           <Card className="text-center card-container">

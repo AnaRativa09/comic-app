@@ -40,6 +40,8 @@ function Home() {
     <>
       <Header rankedComics={rankedComics} />
 
+      <h2>Random Comics</h2>
+
       <Card className="text-center card-container">
         <Card.Header>
           <div className="flex-row">
