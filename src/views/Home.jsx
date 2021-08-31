@@ -40,7 +40,7 @@ function Home() {
     <>
       <Header rankedComics={rankedComics} />
 
-      <h2>Random Comics</h2>
+      <h2>Rank Random Comics</h2>
 
       <Card className="text-center card-container">
         <Card.Header>
