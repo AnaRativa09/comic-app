@@ -8,7 +8,7 @@ function StarRating({
 
   return (
     <div className="star-rating-container">
-      {arrStarts.map((start, index) => {
+      {arrStarts.map((star, index) => {
         const calificationValue = index + 1;
 
         if (valueRanked) {
@@ -20,7 +20,7 @@ function StarRating({
                 setCalification(calificationValue);
                 setIsRanked(true);
               }}
-              key={start}
+              key={`rankStar${star}`}
               aria-label="calification button"
             >
               <FaStar
@@ -39,7 +39,7 @@ function StarRating({
               setCalification(calificationValue);
               setIsRanked(true);
             }}
-            key={start}
+            key={`rankStar${star}`}
             aria-label="calification button"
           >
             <FaStar

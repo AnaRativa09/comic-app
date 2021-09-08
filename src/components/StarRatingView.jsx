@@ -13,7 +13,7 @@ function StarRatingView({ data }) {
           <FaStar
             size={20}
             color={calificationValue <= data.calification ? '#FFB91D' : 'gray'}
-            key={star}
+            key={`viewStar${star}`}
           />
         );
       })}
