@@ -27,7 +27,7 @@ function Collection() {
 
       <section className="comics-ranked-container">
         { localData.map((comic) => (
-          <Card className="text-center card-container">
+          <Card className="text-center card-container" key={comic.dataComic.num}>
             <Card.Header>
               <div className="flex-row">
                 {`#${comic.dataComic.num}`}
