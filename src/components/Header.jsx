@@ -8,7 +8,14 @@ function Header({ rankedComics }) {
 
   return (
     <header className="flex-row">
-      <h1>Comic App</h1>
+      <Button
+        variant="btn-outline-primary"
+        onClick={() => {
+          history.push('/');
+        }}
+      >
+        <h1>Comic App</h1>
+      </Button>
 
       <div className="bottons-nav-container">
         <Button
