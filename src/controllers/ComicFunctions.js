@@ -28,7 +28,18 @@ export const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - m
 // Add data to sessionStorage
 export const addLocalData = (rankedComics) => { sessionStorage.setItem('comics', JSON.stringify(rankedComics)); };
 
-/* ----- Getting Value of Rank Collection ----- */
+/* ----- Get Unique Comics ----- */
+export const getUniqueComic = (arrComics) => {
+  const comicsMap = arrComics.map((item) => [item.dataComic.num, item]);
+  // console.log(comicsMap);
+  const comicsMapArr = new Map(comicsMap); // Pares de clave y valor
+  // console.log(comicsMapArr);
+  const unicos = [...comicsMapArr.values()]; // Conversión a un array
+
+  return unicos;
+};
+
+/* ----- Get Value of Rank Collection ----- */
 // const getValueRank = (numComic, dataComic, numLatestComic) => {
 //   console.log('Numero', numComic);
 //   console.log('Data', dataComic);

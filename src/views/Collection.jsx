@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import { getUniqueComic, addLocalData } from '../controllers/ComicFunctions';
 
 // Import components
 import Header from '../components/Header';
@@ -19,6 +20,10 @@ function Collection() {
     );
   }
 
+  // console.log(getUniqueComic(localData));
+  const uniqueComic = getUniqueComic(localData);
+  addLocalData(uniqueComic);
+
   return (
     <>
       <Header />
@@ -26,7 +31,7 @@ function Collection() {
       <h2>Ranked Collection</h2>
 
       <section className="comics-ranked-container">
-        { localData.map((comic) => (
+        { uniqueComic.map((comic) => (
           <Card className="text-center card-container" key={comic.dataComic.num}>
             <Card.Header>
               <div className="flex-row">
