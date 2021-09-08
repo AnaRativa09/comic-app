@@ -40,16 +40,14 @@ export const getUniqueComic = (arrComics) => {
 };
 
 /* ----- Get Value of Rank Collection ----- */
-// const getValueRank = (numComic, dataComic, numLatestComic) => {
-//   console.log('Numero', numComic);
-//   console.log('Data', dataComic);
-//   if (dataComic === null || dataComic.length === 0 || numComic === null) {
-//     const value = dataComic.filter((comic) => comic.dataComic.num === numLatestComic);
-//     return value;
-//   }
+export const getValueRank = (numComic, dataComic, numLatestComic) => {
+  // console.log('Numero', numComic);
+  // console.log('Data', dataComic);
+  if (dataComic === null || dataComic.length === 0 || numComic === null) {
+    const valueRank = dataComic.filter((comic) => comic.dataComic.num === numLatestComic);
+    return valueRank;
+  }
 
-//   const value = dataComicA.filter((comic) => comic.dataComic.num === numComicA);
-//   return value;
-// };
-
-// console.log('el valor que si existe', getValueRank(numComic, rankedComics, numLatestComic));
+  const valueRank = dataComic.filter((comic) => comic.dataComic.num === numComic);
+  return valueRank;
+};

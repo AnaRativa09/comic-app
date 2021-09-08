@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, ButtonGroup } from 'react-bootstrap';
-import { fetchComic, fetchLatestComic, getRandomNumber } from '../controllers/ComicFunctions';
+import {
+  fetchComic, fetchLatestComic, getRandomNumber, getValueRank,
+} from '../controllers/ComicFunctions';
 
 // Import components
 import Header from '../components/Header';
@@ -22,6 +24,9 @@ function Home() {
   const [calification, setCalification] = useState(null);
 
   // console.log('validated', rankedComics);
+
+  // console.log('el valor que si existe', getValueRank(numComic, rankedComics, numLatestComic));
+  const valueRanked = getValueRank(numComic, rankedComics, numLatestComic);
 
   /* ----- Getting Data ----- */
   useEffect(() => {
@@ -47,6 +52,7 @@ function Home() {
           <div className="flex-row">
             {`#${dataComic.num}`}
             <StarRating
+              valueRanked={valueRanked[0]}
               setIsRanked={setIsRanked}
               setCalification={setCalification}
               calification={calification}
