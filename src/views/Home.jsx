@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, ButtonGroup } from 'react-bootstrap';
 import { fetchComic, fetchLatestComic, getRandomNumber } from '../controllers/ComicFunctions';
 
 // Import components
@@ -60,17 +60,44 @@ function Home() {
         </Card.Body>
 
         <Card.Footer className="card-footer">
-          <Button
-            variant="primary"
-            disabled={!isRanked}
-            onClick={() => {
-              setRankedComics([...rankedComics, { dataComic, calification }]);
-              setCalification(null);
-              setNumComic(getRandomNumber(1, numLatestComic));
-            }}
-          >
-            New Random Comic
-          </Button>
+          <ButtonGroup aria-label="Rank buttons" size="lg">
+            <Button
+              variant="primary"
+              disabled={!isRanked}
+              onClick={() => {
+                setRankedComics([...rankedComics, { dataComic, calification }]);
+                setCalification(null);
+                setNumComic(dataComic.num - 1);
+              }}
+            >
+              Prev
+            </Button>
+
+            <Button
+              variant="primary"
+              disabled={!isRanked || dataComic.num === 1}
+              onClick={() => {
+                setRankedComics([...rankedComics, { dataComic, calification }]);
+                setCalification(null);
+                setNumComic(getRandomNumber(1, numLatestComic));
+              }}
+            >
+              Random
+            </Button>
+
+            <Button
+              variant="primary"
+              disabled={!isRanked || dataComic.num === numLatestComic}
+              onClick={() => {
+                setRankedComics([...rankedComics, { dataComic, calification }]);
+                setCalification(null);
+                setNumComic(dataComic.num + 1);
+              }}
+            >
+              Next
+            </Button>
+
+          </ButtonGroup>
         </Card.Footer>
       </Card>
 
